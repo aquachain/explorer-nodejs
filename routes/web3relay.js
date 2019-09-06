@@ -140,6 +140,7 @@ exports.data = async (req, res) => {
     });
 
   } else if ('tx_trace' in req.body) {
+    if (web3.trace != undefined){
     var txHash = req.body.tx_trace.toLowerCase();
 
     web3.trace.transaction(txHash, (err, tx) => {
@@ -151,7 +152,10 @@ exports.data = async (req, res) => {
       }
       res.end();
     });
+    };
   } else if ('addr_trace' in req.body) {
+
+    if (web3.trace != undefined){
     var addr = req.body.addr_trace.toLowerCase();
     // need to filter both to and from
     // from block to end block, paging "toAddress":[addr],
@@ -167,6 +171,7 @@ exports.data = async (req, res) => {
       }
       res.end();
     });
+    };
   } else if ('addr' in req.body) {
     var addr = req.body.addr.toLowerCase();
     const { options } = req.body;
